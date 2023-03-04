@@ -1,4 +1,5 @@
 import {
+  Alert,
   FlatList,
   ScrollView,
   Text,
@@ -29,10 +30,26 @@ export default function Home() {
   ];
 
   function handleParticipantAdd() {
+    if (nomes.includes("Victor")) {
+      return Alert.alert(
+        "Participante existe",
+        "Já existe um participanmte na lista com esse nome"
+      );
+    }
     console.log(`Você clicou no botão de adicionar`);
   }
 
   function handleParticipantRemove(name: string) {
+    Alert.alert("Remover", `Deseja remover o(a) participante ${name}?`, [
+      {
+        text: "Sim",
+        onPress: () => Alert.alert("Deletado!"),
+      },
+      {
+        text: "Não",
+        style: "cancel",
+      },
+    ]);
     console.log(`Você clicou no botão de remover ${name}`);
   }
 
@@ -55,7 +72,7 @@ export default function Home() {
 
       <FlatList
         data={nomes}
-        keyExtractor={(item) => item + Math.random()}
+        keyExtractor={(item, index) => item + index}
         renderItem={({ item }) => (
           <Participant
             key={item}
