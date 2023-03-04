@@ -55,7 +55,7 @@ export default function Home() {
 
       <FlatList
         data={nomes}
-        keyExtractor={(item) => item}
+        keyExtractor={(item) => item + Math.random()}
         renderItem={({ item }) => (
           <Participant
             key={item}
